@@ -8,7 +8,7 @@ export default function Home() {
   const [sidebarOpened, setSidebarOpened] = useState(false)
 
   const closeSidebar = () => {
-
+    setSidebarOpened(false)
   }
 
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       </Sidebar>
       
       <section className="flex flex-col w-full">
-        ...
+        <button onClick={() => setSidebarOpened(true)} >Abrir SideBar</button>
       </section>
 
     </main>
