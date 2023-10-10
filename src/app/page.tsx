@@ -11,11 +11,16 @@ export default function Home() {
     setSidebarOpened(false)
   }
 
+  const handleClearConversation = () => {
+
+  }
+
   return (
     <main className="flex min-h-screen bg-gpt-gray">
       <Sidebar
         open={sidebarOpened}
         onClose={closeSidebar}
+        onClear={handleClearConversation}
       >
 
       </Sidebar>

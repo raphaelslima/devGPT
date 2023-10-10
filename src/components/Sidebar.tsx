@@ -4,14 +4,19 @@ import { ReactNode } from "react"
 import IconClose from "./icons/IconClose";
 import IconAdd from "./icons/IconAdd";
 
+//Components
+import SidebarButton from "./SidebarButton";
+import IconTrash from "./icons/IconTrash";
+
 type Props={
     children: ReactNode;
     open: boolean;
-    onClose: () => void
+    onClose: () => void;
+    onClear: () => void
 }
 
 
-const Sidebar = ({open, onClose, children}: Props) => {
+const Sidebar = ({open, onClose, onClear, children}: Props) => {
     console.log(open)
     
     return(
@@ -22,11 +27,25 @@ const Sidebar = ({open, onClose, children}: Props) => {
         <div className={`transition-all duration-200 flex h-screen ${open ? 'ml-0' : '-ml-96'} md:ml-0`}>
 
             <div className="flex flex-col w-64 p-2 bg-gray-900">
+
                 <div 
                 className="transition-all duration-500 flex items-center p-3 rounded-md text-sm cursor-pointer border border-white/20 hover:bg-gray-500/20">
                     <IconAdd width={16} height={16} className="mr-3"/>
                     Nova Conversa
                 </div>
+
+                <nav className="flex-1 pt-2 overflow-y-auto">
+                    {children}
+                </nav>
+
+                <div className="border-t border-gray-700 pt-2">
+                    <SidebarButton 
+                    label="Limpar todas as conversar"
+                    onClick={onClear}
+                    icon={<IconTrash width={16} height={16}/>}
+                    />
+                </div>
+
             </div>
 
             <div 
