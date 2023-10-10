@@ -13,12 +13,11 @@ type Props={
     open: boolean;
     onClose: () => void;
     onClear: () => void
+    onNewChat: () => void
 }
 
 
-const Sidebar = ({open, onClose, onClear, children}: Props) => {
-    console.log(open)
-    
+const Sidebar = ({open, onClose, onClear, onNewChat, children}: Props) => {
     return(
         <section 
         className={`fixed top-0 left-0 bottom-0 text-white 
@@ -29,6 +28,7 @@ const Sidebar = ({open, onClose, onClear, children}: Props) => {
             <div className="flex flex-col w-64 p-2 bg-gray-900">
 
                 <div 
+                onClick={onNewChat}
                 className="transition-all duration-500 flex items-center p-3 rounded-md text-sm cursor-pointer border border-white/20 hover:bg-gray-500/20">
                     <IconAdd width={16} height={16} className="mr-3"/>
                     Nova Conversa

@@ -15,12 +15,17 @@ export default function Home() {
 
   }
 
+  const handleNewChat = () => {
+    
+  }
+
   return (
     <main className="flex min-h-screen bg-gpt-gray">
       <Sidebar
         open={sidebarOpened}
         onClose={closeSidebar}
         onClear={handleClearConversation}
+        onNewChat={handleNewChat}
       >
 
       </Sidebar>
