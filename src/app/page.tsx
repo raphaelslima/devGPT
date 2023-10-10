@@ -5,10 +5,15 @@ import { useState } from "react";
 //Components
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
+import ChatArea from "@/components/ChatArea";
+
+// types
+import { Chat } from "@/types/Chat";
 
 export default function Home() {
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
+  const [chatActive, setChatActive] = useState<Chat>()
 
   const closeSidebar = () => setSidebarOpened(false)
   const openSidebar = () => setSidebarOpened(true)
@@ -33,13 +38,16 @@ export default function Home() {
       </Sidebar>
       
       <section className="flex flex-col w-full">
+
         <Header
           openSidebarClick={openSidebar}
           title={`bla bla bla`}
           newChatClick={handleNewChat}
         />
-      </section>
 
+        <ChatArea chat={chatActive}/>
+
+      </section>
     </main>
   )
 }
