@@ -92,7 +92,7 @@ export default function Home() {
           newChatClick={handleNewChat}
         />
 
-        <ChatArea chat={chatActive}/>
+        <ChatArea chat={chatActive} loading={AILoading}/>
 
         <ChatFooter
           onSendMessage={handleSendMessage}
