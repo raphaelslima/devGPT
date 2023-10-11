@@ -9,11 +9,28 @@ import ChatArea from "@/components/ChatArea";
 
 // types
 import { Chat } from "@/types/Chat";
+import ChatFooter from "@/components/ChatFooter";
 
 export default function Home() {
 
   const [sidebarOpened, setSidebarOpened] = useState(false)
-  const [chatActive, setChatActive] = useState<Chat>()
+  const [AILoading, setAILoading] = useState(false)
+  const [chatActive, setChatActive] = useState<Chat>({
+    id: '123',
+    title: 'bla bla',
+    messages: [
+      {
+      id: '99',
+      author: 'me',
+      body: 'bla bla'
+      },
+      {
+        id: '11',
+        author: 'ai',
+        body: 'blu blu'
+        }
+  ]
+  })
 
   const closeSidebar = () => setSidebarOpened(false)
   const openSidebar = () => setSidebarOpened(true)
@@ -23,6 +40,10 @@ export default function Home() {
   }
 
   const handleNewChat = () => {
+
+  }
+
+  const handleSendMessage = () =>{
 
   }
 
@@ -46,6 +67,11 @@ export default function Home() {
         />
 
         <ChatArea chat={chatActive}/>
+
+        <ChatFooter
+          onSendMessage={handleSendMessage}
+          disabled={AILoading}
+        />
 
       </section>
     </main>
