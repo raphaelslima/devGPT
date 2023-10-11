@@ -24,6 +24,10 @@ export default function Home() {
     setChatActive(chatList.find((item) => item.id === chatActiveId))
   }, [chatActiveId, chatList])
 
+  useEffect(()=>{
+    if(AILoading) getResponseAI()
+  }, [AILoading])
+
   const closeSidebar = () => setSidebarOpened(false);
   const openSidebar = () => setSidebarOpened(true);
 
@@ -60,18 +64,32 @@ export default function Home() {
     } else{
 
       let chatListClone = [...chatList];
-      let chatIndex = chatListClone.findIndex((item)=> item.id === chatActiveId)
+      let chatIndex = chatListClone.findIndex((item)=> item.id === chatActiveId);
       chatListClone[chatIndex].messages.push({
         id: uuidv4(),
         author: 'me',
         body: msg
-      })
+      });
 
-      setChatList(chatListClone)
+      setChatList(chatListClone);
     }
 
     setAILoading(true)
   };
+
+  const getResponseAI = () =>{
+    setTimeout(()=> {
+      let cloneChatList = [...chatList];
+      const chatIndex = cloneChatList.findIndex((item) => item.id === chatActiveId);
+      cloneChatList[chatIndex].messages.push({
+        id: uuidv4(),
+        author: 'ai',
+        body: 'Resposta ia'
+      });
+      setChatList(cloneChatList);
+      setAILoading(false);
+    },2000)
+  }
 
   return (
     <main className="flex min-h-screen bg-gpt-gray">
