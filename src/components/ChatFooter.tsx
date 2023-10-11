@@ -1,3 +1,6 @@
+// Components
+import ChatMessageInput from "./ChatMessageInput"
+
 //Types
 type Props = {
     disabled: boolean
