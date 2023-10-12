@@ -7,6 +7,7 @@ import {v4 as uuidv4 } from 'uuid'
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 import ChatArea from "@/components/ChatArea";
+import SidebarChatButton from "@/components/SidebarChatButton";
 
 // types
 import { Chat } from "@/types/Chat";
@@ -89,7 +90,19 @@ export default function Home() {
       setChatList(cloneChatList);
       setAILoading(false);
     },2000)
-  }
+  };
+
+  const handleSelectChat = (id: string) => {
+
+  };
+
+  const handleDeleteChat = (id: string) => {
+
+  };
+
+  const handleEditChat = (id: string, newTitle: string) => {
+
+  };
 
   return (
     <main className="flex min-h-screen bg-gpt-gray">
@@ -99,14 +112,23 @@ export default function Home() {
         onClear={handleClearConversation}
         onNewChat={handleNewChat}
       >
-
+        {chatList.map((item) => (
+          <SidebarChatButton
+            key={item.id}
+            chatItem={item}
+            active={item.id === chatActiveId}
+            onClick={handleSelectChat}
+            onDelete={handleDeleteChat}
+            onEdit={handleEditChat}
+          />
+        ))}
       </Sidebar>
       
       <section className="flex flex-col w-full">
 
         <Header
           openSidebarClick={openSidebar}
-          title={`bla bla bla`}
+          title={chatActive ? chatActive.title : 'Nova Conserva'}
           newChatClick={handleNewChat}
         />
 
