@@ -93,14 +93,28 @@ export default function Home() {
   };
 
   const handleSelectChat = (id: string) => {
+    if( AILoading) return;
 
+    let existChat = chatList.find(item => item.id === id);
+    if(existChat) setChatActiveId(id);
+    closeSidebar()
   };
 
   const handleDeleteChat = (id: string) => {
-
+    let chatListClone = [...chatList];
+    const indexChat = chatListClone.findIndex((item) => item.id === id);
+    chatListClone.splice(indexChat, 1);
+    setChatList(chatListClone)
+    setChatActiveId('');
   };
 
   const handleEditChat = (id: string, newTitle: string) => {
+    if(newTitle === '') return;
+
+    let chatListClone = [...chatList];
+    const indexChat = chatListClone.findIndex((item) => item.id === id);
+    chatListClone[indexChat].title = newTitle;
+    setChatList(chatListClone);
 
   };
 
