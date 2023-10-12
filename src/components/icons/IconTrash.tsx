@@ -1,5 +1,5 @@
 // icon:trash | Bootstrap https://icons.getbootstrap.com/ | Bootstrap
-import * as React from "react";
+import * as React from 'react';
 
 function IconTrash(props: React.SVGProps<SVGSVGElement>) {
   return (

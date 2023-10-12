@@ -1,71 +1,73 @@
-'use client'
+'use client';
 
-import { useEffect, useState } from "react";
-import {v4 as uuidv4 } from 'uuid'
+import { useEffect, useState } from 'react';
 
 //Components
-import Header from "@/components/Header";
-import Sidebar from "@/components/Sidebar";
-import ChatArea from "@/components/ChatArea";
-import SidebarChatButton from "@/components/SidebarChatButton";
+import ChatArea from '@/components/ChatArea';
+import ChatFooter from '@/components/ChatFooter';
+import Header from '@/components/Header';
+import Sidebar from '@/components/Sidebar';
+import SidebarChatButton from '@/components/SidebarChatButton';
 
 // types
-import { Chat } from "@/types/Chat";
-import ChatFooter from "@/components/ChatFooter";
+import { Chat } from '@/types/Chat';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
-
   const [sidebarOpened, setSidebarOpened] = useState(false);
   const [chatList, setChatList] = useState<Chat[]>([]);
   const [chatActiveId, setChatActiveId] = useState('');
   const [AILoading, setAILoading] = useState(false);
   const [chatActive, setChatActive] = useState<Chat>();
 
-  useEffect(()=> {
-    setChatActive(chatList.find((item) => item.id === chatActiveId))
-  }, [chatActiveId, chatList])
+  useEffect(() => {
+    setChatActive(chatList.find((item) => item.id === chatActiveId));
+  }, [chatActiveId, chatList]);
 
-  useEffect(()=>{
-    if(AILoading) getResponseAI()
-  }, [AILoading])
+  useEffect(() => {
+    if (AILoading) getResponseAI();
+  }, [AILoading]);
 
   const closeSidebar = () => setSidebarOpened(false);
   const openSidebar = () => setSidebarOpened(true);
 
   const handleClearConversation = () => {
-    if(AILoading) return;
+    if (AILoading) return;
     setChatActiveId('');
     setChatList([]);
   };
 
   const handleNewChat = () => {
-    if(AILoading) return;
+    if (AILoading) return;
     setChatActiveId('');
-    closeSidebar()
+    closeSidebar();
   };
 
-  const handleSendMessage = (msg: string) =>{
-    if(!chatActiveId){
+  const handleSendMessage = (msg: string) => {
+    if (!chatActiveId) {
+      const newChatId = uuidv4();
 
-      let newChatId = uuidv4();
-
-      setChatList([ {
-        id: newChatId,
-        title: msg,
-        messages: [
-          {
-            id: uuidv4(),
-            author: 'me',
-            body: msg
-          }
-        ]
-      } ,...chatList]);
+      setChatList([
+        {
+          id: newChatId,
+          title: msg,
+          messages: [
+            {
+              id: uuidv4(),
+              author: 'me',
+              body: msg
+            }
+          ]
+        },
+        ...chatList
+      ]);
 
       setChatActiveId(newChatId);
-    } else{
-
-      let chatListClone = [...chatList];
-      let chatIndex = chatListClone.findIndex((item)=> item.id === chatActiveId);
+    } else {
+      const chatListClone = [...chatList];
+      const chatIndex = chatListClone.findIndex(
+        (item) => item.id === chatActiveId
+      );
       chatListClone[chatIndex].messages.push({
         id: uuidv4(),
         author: 'me',
@@ -75,13 +77,15 @@ export default function Home() {
       setChatList(chatListClone);
     }
 
-    setAILoading(true)
+    setAILoading(true);
   };
 
-  const getResponseAI = () =>{
-    setTimeout(()=> {
-      let cloneChatList = [...chatList];
-      const chatIndex = cloneChatList.findIndex((item) => item.id === chatActiveId);
+  const getResponseAI = () => {
+    setTimeout(() => {
+      const cloneChatList = [...chatList];
+      const chatIndex = cloneChatList.findIndex(
+        (item) => item.id === chatActiveId
+      );
       cloneChatList[chatIndex].messages.push({
         id: uuidv4(),
         author: 'ai',
@@ -89,32 +93,31 @@ export default function Home() {
       });
       setChatList(cloneChatList);
       setAILoading(false);
-    },2000)
+    }, 2000);
   };
 
   const handleSelectChat = (id: string) => {
-    if( AILoading) return;
+    if (AILoading) return;
 
-    let existChat = chatList.find(item => item.id === id);
-    if(existChat) setChatActiveId(id);
+    const existChat = chatList.find((item) => item.id === id);
+    if (existChat) setChatActiveId(id);
   };
 
   const handleDeleteChat = (id: string) => {
-    let chatListClone = [...chatList];
+    const chatListClone = [...chatList];
     const indexChat = chatListClone.findIndex((item) => item.id === id);
     chatListClone.splice(indexChat, 1);
-    setChatList(chatListClone)
+    setChatList(chatListClone);
     setChatActiveId('');
   };
 
   const handleEditChat = (id: string, newTitle: string) => {
-    if(newTitle === '') return;
+    if (newTitle === '') return;
 
-    let chatListClone = [...chatList];
+    const chatListClone = [...chatList];
     const indexChat = chatListClone.findIndex((item) => item.id === id);
     chatListClone[indexChat].title = newTitle;
     setChatList(chatListClone);
-
   };
 
   return (
@@ -136,24 +139,18 @@ export default function Home() {
           />
         ))}
       </Sidebar>
-      
-      <section className="flex flex-col w-full">
 
+      <section className="flex flex-col w-full">
         <Header
           openSidebarClick={openSidebar}
           title={chatActive ? chatActive.title : 'Nova Conserva'}
           newChatClick={handleNewChat}
         />
 
-        <ChatArea chat={chatActive} loading={AILoading}/>
+        <ChatArea chat={chatActive} loading={AILoading} />
 
-        <ChatFooter
-          onSendMessage={handleSendMessage}
-          disabled={AILoading}
-        />
-
+        <ChatFooter onSendMessage={handleSendMessage} disabled={AILoading} />
       </section>
     </main>
-  )
+  );
 }
-

@@ -1,5 +1,5 @@
 // icon:edit-3 | Feathericons https://feathericons.com/ | Cole Bemis
-import * as React from "react";
+import * as React from 'react';
 
 function IconEdit3(props: React.SVGProps<SVGSVGElement>) {
   return (

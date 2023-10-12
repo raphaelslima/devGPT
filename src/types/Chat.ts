@@ -1,7 +1,7 @@
-import { chatMessage } from "./ChatMessage";
+import { chatMessage } from './ChatMessage';
 
 export type Chat = {
-    id: string;
-    title: string;
-    messages: chatMessage[];
-}
+  id: string;
+  title: string;
+  messages: chatMessage[];
+};

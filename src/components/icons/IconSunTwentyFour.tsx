@@ -1,5 +1,5 @@
 // icon:sun-24 | Octicons https://primer.style/octicons/ | Github Primer
-import * as React from "react";
+import * as React from 'react';
 
 function IconSunTwentyFour(props: React.SVGProps<SVGSVGElement>) {
   return (

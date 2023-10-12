@@ -1,5 +1,5 @@
 // icon:user | Ant Design Icons https://ant.design/components/icon/ | Ant Design
-import * as React from "react";
+import * as React from 'react';
 
 function IconUser(props: React.SVGProps<SVGSVGElement>) {
   return (

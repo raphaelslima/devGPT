@@ -1,5 +1,5 @@
 // icon:robot | Tabler Icons https://tablericons.com/ | Csaba Kissi
-import * as React from "react";
+import * as React from 'react';
 
 function IconRobot(props: React.SVGProps<SVGSVGElement>) {
   return (
