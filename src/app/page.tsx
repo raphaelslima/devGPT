@@ -97,7 +97,6 @@ export default function Home() {
 
     let existChat = chatList.find(item => item.id === id);
     if(existChat) setChatActiveId(id);
-    closeSidebar()
   };
 
   const handleDeleteChat = (id: string) => {

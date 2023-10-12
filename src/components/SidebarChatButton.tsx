@@ -30,7 +30,6 @@ const SidebarChatButton = ({chatItem, active, onClick, onDelete, onEdit} : Props
     };
 
     const handleConfirmButton = () => {
-        console.log('confirm')
         if(deleting) onDelete(chatItem.id);
         if(editing && titleInput.trim() !== '') onEdit(chatItem.id, titleInput);
 
